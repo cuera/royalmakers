@@ -14,6 +14,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="dns-prefetch" href="//my.spline.design" />
+        <link rel="preconnect" href="https://my.spline.design" />
+      </head>
       <body>{children}</body>
     </html>
   )

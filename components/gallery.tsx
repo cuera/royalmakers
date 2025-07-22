@@ -1,202 +1,239 @@
 "use client"
 
-import { useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import Image from "next/image"
-import { X, ChevronLeft, ChevronRight } from "lucide-react"
-import GalleryGrid from "./gallery-grid"
+import React from "react"
+import { motion } from "framer-motion"
+import DayCircularGallery from "./DayCircularGallery"
 
-interface GalleryData {
-  day1: string[]
-  day2: string[]
-  day3: string[]
+// Types for better organization
+interface DayMosaicCard {
+  title: string
+  subtitle: string
+  image: string
 }
 
-const gallery: GalleryData = {
-  day1: Array(6).fill("/placeholder.svg?height=400&width=600"),
-  day2: Array(6).fill("/placeholder.svg?height=400&width=600"),
-  day3: Array(6).fill("/placeholder.svg?height=400&width=600"),
+interface DayActivity {
+  id: string
+  title: string
+  subtitle: string
+  cards: DayMosaicCard[]
 }
 
-interface LightboxProps {
-  images: string[]
-  currentIndex: number
-  isOpen: boolean
-  onClose: () => void
-  onNext: () => void
-  onPrev: () => void
+// Centralized activity data with real image paths
+const ACTIVITY_DAYS: DayActivity[] = [
+  {
+    id: "day-1",
+    title: "Day 1 — Foundation Building",
+    subtitle: "Discovery & Exploration",
+    cards: [
+      {
+        title: "Analytics",
+        subtitle: "Track user behavior and engagement",
+        image: "/bento/day1-analytics.webp"
+      },
+      {
+        title: "Dashboard",
+        subtitle: "Centralized data visualization",
+        image: "/bento/day1-dashboard.webp"
+      },
+      {
+        title: "Collaboration",
+        subtitle: "Work together seamlessly on projects",
+        image: "/bento/day1-collaboration.webp"
+      },
+      {
+        title: "Automation",
+        subtitle: "Streamline workflows and processes",
+        image: "/bento/day1-automation.webp"
+      },
+      {
+        title: "Integration",
+        subtitle: "Connect and sync favorite tools",
+        image: "/bento/day1-integration.webp"
+      },
+      {
+        title: "Security",
+        subtitle: "Enterprise-grade data protection",
+        image: "/bento/day1-security.webp"
+      }
+    ]
+  },
+  {
+    id: "day-2",
+    title: "Day 2 — Advanced Projects",
+    subtitle: "Creation & Development",
+    cards: [
+      {
+        title: "Prototyping",
+        subtitle: "Rapid iteration and design thinking",
+        image: "/bento/day2-prototyping.webp"
+      },
+      {
+        title: "Coding",
+        subtitle: "Build real applications and systems",
+        image: "/bento/day2-coding.webp"
+      },
+      {
+        title: "Quality Assurance",
+        subtitle: "Ensure robust and reliable solutions",
+        image: "/bento/day2-testing.webp"
+      },
+      {
+        title: "CI/CD Pipeline",
+        subtitle: "Automate releases and deployments",
+        image: "/bento/day2-deployment.webp"
+      },
+      {
+        title: "Observability",
+        subtitle: "Track performance and health metrics",
+        image: "/bento/day2-monitoring.webp"
+      },
+      {
+        title: "Help Desk",
+        subtitle: "Provide user assistance and support",
+        image: "/bento/day2-support.webp"
+      }
+    ]
+  },
+  {
+    id: "day-3",
+    title: "Day 3 — Final Showcase",
+    subtitle: "Presentation & Celebration",
+    cards: [
+      {
+        title: "Demo Day",
+        subtitle: "Present projects to peers and mentors",
+        image: "/bento/day3-demo.webp"
+      },
+      {
+        title: "Peer Review",
+        subtitle: "Receive constructive insights and feedback",
+        image: "/bento/day3-review.webp"
+      },
+      {
+        title: "Awards Ceremony",
+        subtitle: "Celebrate outstanding achievements",
+        image: "/bento/day3-awards.webp"
+      },
+      {
+        title: "Retrospective",
+        subtitle: "Learn from experiences and improve",
+        image: "/bento/day3-reflection.webp"
+      },
+      {
+        title: "Roadmap Planning",
+        subtitle: "Plan next steps and future projects",
+        image: "/bento/day3-roadmap.webp"
+      },
+      {
+        title: "Networking",
+        subtitle: "Build lasting connections and mentorships",
+        image: "/bento/day3-networking.webp"
+      }
+    ]
+  }
+]
+
+// Animation variants
+const sectionVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease: [0.25, 0.1, 0.25, 1] as any
+    }
+  }
 }
 
-function Lightbox({ images, currentIndex, isOpen, onClose, onNext, onPrev }: LightboxProps) {
-  if (!isOpen) return null
+const titleVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: [0.25, 0.1, 0.25, 1] as any
+    }
+  }
+}
 
+// Day Activity Section Component
+interface DayActivitySectionProps {
+  activity: DayActivity
+  index: number
+}
+
+function DayActivitySection({ activity, index }: DayActivitySectionProps) {
   return (
-    <AnimatePresence>
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.2 }}
-        className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
-        onClick={onClose}
-      >
-        {/* Close button */}
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 z-60 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={sectionVariants}
+      className="mb-20 last:mb-0"
+    >
+      <div className="text-center mb-12">
+        <motion.h2
+          variants={titleVariants}
+          className="text-4xl md:text-5xl font-bold mb-4"
         >
-          <X className="w-6 h-6 text-white" />
-        </button>
-
-        {/* Previous button */}
-        <button
-          onClick={(e) => {
-            e.stopPropagation()
-            onPrev()
-          }}
-          className="absolute left-4 top-1/2 -translate-y-1/2 z-60 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
+          {activity.title}
+        </motion.h2>
+        <motion.h3
+          variants={titleVariants}
+          className="text-2xl md:text-3xl font-medium text-subtitle-gray mb-6"
         >
-          <ChevronLeft className="w-6 h-6 text-white" />
-        </button>
-
-        {/* Next button */}
-        <button
-          onClick={(e) => {
-            e.stopPropagation()
-            onNext()
-          }}
-          className="absolute right-4 top-1/2 -translate-y-1/2 z-60 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
-        >
-          <ChevronRight className="w-6 h-6 text-white" />
-        </button>
-
-        {/* Image */}
-        <motion.div
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          exit={{ scale: 0.8, opacity: 0 }}
-          transition={{ duration: 0.2 }}
-          className="relative max-w-[90vw] max-h-[90vh]"
-          onClick={(e) => e.stopPropagation()}
-        >
-          <Image
-            src={images[currentIndex] || "/placeholder.svg"}
-            alt={`Gallery image ${currentIndex + 1}`}
-            width={800}
-            height={600}
-            className="max-w-full max-h-full object-contain rounded-lg"
+          {activity.subtitle}
+        </motion.h3>
+      </div>
+      
+      <DayCircularGallery 
+        cards={activity.cards}
+        dayNumber={index + 1}
           />
         </motion.div>
-      </motion.div>
-    </AnimatePresence>
   )
 }
 
-export function Gallery() {
-  const [lightbox, setLightbox] = useState<{
-    isOpen: boolean
-    images: string[]
-    currentIndex: number
-  }>({
-    isOpen: false,
-    images: [],
-    currentIndex: 0,
-  })
-
-  const openLightbox = (images: string[], index: number) => {
-    setLightbox({
-      isOpen: true,
-      images,
-      currentIndex: index,
-    })
-  }
-
-  const closeLightbox = () => {
-    setLightbox((prev) => ({ ...prev, isOpen: false }))
-  }
-
-  const nextImage = () => {
-    setLightbox((prev) => ({
-      ...prev,
-      currentIndex: (prev.currentIndex + 1) % prev.images.length,
-    }))
-  }
-
-  const prevImage = () => {
-    setLightbox((prev) => ({
-      ...prev,
-      currentIndex: prev.currentIndex === 0 ? prev.images.length - 1 : prev.currentIndex - 1,
-    }))
-  }
-
+// Main Gallery Component
+const Gallery = React.memo(function Gallery() {
   return (
-    <>
-      <section className="bg-black text-white py-16">
+    <section className="bg-black text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Section Header */}
-          <div className="text-center mb-16">
+        {/* Main Section Header */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={sectionVariants}
+          className="text-center mb-20"
+        >
             <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="text-4xl md:text-5xl font-bold mb-6"
+            variants={titleVariants}
+            className="text-5xl md:text-7xl font-bold mb-8 text-neon-green"
             >
               3-Day Innovation Journey
             </motion.h1>
             <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.1 }}
-              className="text-xl text-gray-300 max-w-3xl mx-auto"
-            >
-              Experience the transformation as young minds explore, create, and innovate through our comprehensive STEM
-              program
+            variants={titleVariants}
+            className="text-2xl text-subtitle-gray max-w-4xl mx-auto leading-relaxed"
+          >
+            Experience the transformation as young minds explore, create, and innovate through our comprehensive STEM program
             </motion.p>
-          </div>
+        </motion.div>
 
-          {/* Day 1 */}
-          <div className="mb-16">
-            <div className="text-center mb-12">
-              <h2 className="text-4xl md:text-5xl font-bold mb-6">Day 1 — Foundation Building</h2>
-              <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-                A glimpse into our hands-on STEM activities and student projects
-              </p>
-            </div>
-            <GalleryGrid images={gallery.day1} />
-          </div>
-
-          {/* Day 2 */}
-          <div className="mb-16">
-            <div className="text-center mb-12">
-              <h2 className="text-4xl md:text-5xl font-bold mb-6">Day 2 — Advanced Projects</h2>
-              <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-                A glimpse into our hands-on STEM activities and student projects
-              </p>
-            </div>
-            <GalleryGrid images={gallery.day2} />
-          </div>
-
-          {/* Day 3 */}
-          <div className="mb-16">
-            <div className="text-center mb-12">
-              <h2 className="text-4xl md:text-5xl font-bold mb-6">Day 3 — Final Showcase</h2>
-              <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-                A glimpse into our hands-on STEM activities and student projects
-              </p>
-            </div>
-            <GalleryGrid images={gallery.day3} />
-          </div>
+        {/* Activity Days */}
+        {ACTIVITY_DAYS.map((activity, index) => (
+          <DayActivitySection
+            key={activity.id}
+            activity={activity}
+            index={index}
+          />
+        ))}
         </div>
       </section>
-
-      <Lightbox
-        images={lightbox.images}
-        currentIndex={lightbox.currentIndex}
-        isOpen={lightbox.isOpen}
-        onClose={closeLightbox}
-        onNext={nextImage}
-        onPrev={prevImage}
-      />
-    </>
   )
-}
+})
+
+export default Gallery

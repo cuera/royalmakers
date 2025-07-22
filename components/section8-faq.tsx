@@ -107,7 +107,7 @@ export function Section8FAQ() {
           className="text-center mb-12"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-6">Frequently Asked Questions</h2>
-          <p className="text-xl text-gray-300">Find answers to common questions about our STEM programs</p>
+          <p className="text-xl text-subtitle-gray">Find answers to common questions about our STEM programs</p>
         </motion.div>
 
         {/* Search Bar */}
@@ -123,7 +123,7 @@ export function Section8FAQ() {
             placeholder="Search FAQs..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-12 pr-4 py-4 bg-gray-900/50 border border-gray-700 rounded-xl text-white placeholder-gray-400 focus:border-cyan-400 focus:outline-none transition-colors"
+            className="w-full pl-12 pr-4 py-4 bg-gray-900/50 border border-gray-700 rounded-xl text-white placeholder-gray-400 focus:border-neon-green focus:outline-none transition-colors"
           />
         </motion.div>
 
@@ -142,7 +142,7 @@ export function Section8FAQ() {
                 onClick={() => setExpandedCategory(expandedCategory === category ? null : category)}
                 className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-800/50 transition-colors rounded-xl"
               >
-                <h3 className="text-xl font-bold text-cyan-400">{category}</h3>
+                <h3 className="text-xl font-bold text-neon-green">{category}</h3>
                 <motion.div
                   animate={{ rotate: expandedCategory === category ? 180 : 0 }}
                   transition={{ duration: 0.3 }}
@@ -183,7 +183,7 @@ export function Section8FAQ() {
                                 transition={{ duration: 0.3 }}
                                 className="overflow-hidden"
                               >
-                                <p className="text-gray-300 leading-relaxed">{faq.answer}</p>
+                                <p className="text-subtitle-gray leading-relaxed">{faq.answer}</p>
                               </motion.div>
                             )}
                           </AnimatePresence>
@@ -200,10 +200,10 @@ export function Section8FAQ() {
         {/* No Results */}
         {Object.keys(filteredFAQs).length === 0 && searchTerm && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-12">
-            <p className="text-gray-400 text-lg">No FAQs found matching "{searchTerm}"</p>
+            <p className="text-subtitle-gray text-lg">No FAQs found matching "{searchTerm}"</p>
             <button
               onClick={() => setSearchTerm("")}
-              className="mt-4 text-cyan-400 hover:text-cyan-300 transition-colors"
+              className="mt-4 text-neon-green hover:text-neon-green-light transition-colors"
             >
               Clear search
             </button>

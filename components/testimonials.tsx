@@ -19,7 +19,7 @@ const testimonials = {
       id: 1,
       name: "Mihika Das",
       role: "Camper",
-      photo: "/placeholder.svg?height=64&width=64",
+      photo: "/Mihika Das.webp?height=64&width=64",
       rating: 5,
       quote: "I loved building my first robot—why is it only 3 days? 😄",
     },
@@ -27,7 +27,7 @@ const testimonials = {
       id: 2,
       name: "Arjun Sharma",
       role: "Student Participant",
-      photo: "/placeholder.svg?height=64&width=64",
+      photo: "/Arjun Sharma.webp?height=64&width=64",
       rating: 5,
       quote: "The coding challenges were amazing! I learned Python and made my robot dance.",
     },
@@ -35,7 +35,7 @@ const testimonials = {
       id: 3,
       name: "Priya Patel",
       role: "Young Innovator",
-      photo: "/placeholder.svg?height=64&width=64",
+      photo: "/Priyal Patel.webp?height=64&width=64",
       rating: 5,
       quote: "Building circuits and seeing LEDs light up was magical. I want to be an engineer now!",
     },
@@ -43,35 +43,35 @@ const testimonials = {
   parents: [
     {
       id: 4,
-      name: "Mrs. Warnekar",
-      role: "Parent of Mihika & Mayank",
-      photo: "/placeholder.svg?height=64&width=64",
+      name: "Priyanka Garg",
+      role: "Parent of Aarjav",
+      photo: "/priya.jpeg?height=64&width=64",
       rating: 5,
-      quote: "Thank you Sir! Both Mihika and Mayank enjoyed the camp—they even asked why it's only 3 days!",
+      quote: "I would like to thank entire Summer Camp team for conducting this knowledgeable camp for the kids. Aarjav had great fun and is already looking forward for the next year",
     },
     {
       id: 5,
-      name: "Mrs. Navya's Mom",
+      name: "Mrs. Suruchi",
       role: "Parent",
-      photo: "/placeholder.svg?height=64&width=64",
+      photo: "/Suruchi.jpeg?height=64&width=64",
       rating: 5,
       quote:
-        "Thank you Nabojyoti sir and team for organising such a wonderful MakerCamp. Navya had a great experience!",
+        "Thank you Nabojyoti and team for organising such a wonderful MakerCamp.Amaya had a very new and a great learning experience at the workshop.",
     },
     {
       id: 6,
-      name: "Mr. Rajesh Kumar",
-      role: "Father of Arjun",
-      photo: "/placeholder.svg?height=64&width=64",
+      name: "Payal Agarwal",
+      role: "Mother of Darsh",
+      photo: "/payal.jpeg?height=64&width=64",
       rating: 5,
       quote:
-        "My son came home excited every day, showing us his projects. This camp ignited his passion for technology.",
+        "Thank you Sir, for the wonderful robot-making camp! Darsh really enjoyed it a lot,.",
     },
     {
       id: 7,
-      name: "Dr. Meera Singh",
-      role: "Mother of Priya",
-      photo: "/placeholder.svg?height=64&width=64",
+      name: "Dr.Singh",
+      role: "Parent",
+      photo: "/parent.jpg?height=64&width=64",
       rating: 5,
       quote:
         "Exceptional program! The hands-on approach and expert guidance transformed my daughter's interest in STEM.",
@@ -82,7 +82,7 @@ const testimonials = {
       id: 8,
       name: "Arup Mukhopadhyay",
       role: "Director, RGS",
-      photo: "/placeholder.svg?height=64&width=64",
+      photo: "/Arup Kr. Mukhopdhyay.webp?height=64&width=64",
       rating: 5,
       quote: "Seeing young minds design and build real robots in just 3 days was truly inspiring.",
     },
@@ -90,15 +90,15 @@ const testimonials = {
       id: 9,
       name: "Nabojyoti Gupta",
       role: "Coordinator, RGS",
-      photo: "/placeholder.svg?height=64&width=64",
+      photo: "/Nabojyoti Gupta.webp?height=64&width=64",
       rating: 5,
       quote: "The level of engagement and practical learning exceeded all expectations.",
     },
     {
       id: 10,
-      name: "Prof. Anita Desai",
+      name: "Explorer Dip",
       role: "STEM Education Specialist",
-      photo: "/placeholder.svg?height=64&width=64",
+      photo: "/Sparkbee.webp?height=64&width=64",
       rating: 5,
       quote:
         "This program sets the gold standard for hands-on STEM education. Remarkable results in such a short time.",
@@ -109,15 +109,15 @@ const testimonials = {
       id: 11,
       name: "Sparkbee Team",
       role: "Industry Partner",
-      photo: "/placeholder.svg?height=64&width=64",
+      photo: "/logo.webp?height=128&width=128",
       rating: 5,
       quote: "Collaborating on this camp was seamless—our students gained real-world skills in robotics and coding.",
     },
     {
       id: 12,
       name: "Tech Innovation Hub",
-      role: "Corporate Sponsor",
-      photo: "/placeholder.svg?height=64&width=64",
+      role: "Corporate",
+      photo: "/112.webp?height=32&width=32",
       rating: 5,
       quote:
         "Supporting this initiative aligns perfectly with our mission to nurture the next generation of innovators.",
@@ -148,7 +148,7 @@ export function Testimonials() {
           className="text-center mb-12"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-6">What People Say</h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="text-xl text-subtitle-gray max-w-3xl mx-auto">
             Hear from students, parents, educators, and partners about their transformative experience with our STEM
             program
           </p>
@@ -167,7 +167,7 @@ export function Testimonials() {
               onClick={() => setActiveTab(tab.key)}
               className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
                 activeTab === tab.key
-                  ? "bg-cyan-400 text-black shadow-[0_0_20px_rgba(0,255,255,0.4)]"
+                  ? "bg-neon-green text-black shadow-[0_0_20px_rgba(66,217,138,0.4)]"
                   : "bg-gray-800 text-gray-300 hover:bg-gray-700 hover:text-white border border-gray-600"
               }`}
             >
@@ -192,8 +192,10 @@ export function Testimonials() {
             transition={{ type: "spring", stiffness: 120, damping: 20 }}
             cardClassName="bg-gray-900 border border-gray-700 rounded-xl p-8 shadow-lg"
             photoClassName="w-16 h-16 rounded-full border-2 border-white object-cover"
-            ratingColor="#0ff"
+            ratingColor="#25a360"
             textClassName="text-lg leading-relaxed"
+            dotColor="#1E441E"
+            activeDotColor="#25a360"
           />
         </motion.div>
 
@@ -211,8 +213,8 @@ export function Testimonials() {
             { number: "3", label: "Days to Transform" },
           ].map((stat, index) => (
             <div key={index} className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-cyan-400 mb-2">{stat.number}</div>
-              <div className="text-gray-400">{stat.label}</div>
+              <div className="text-3xl md:text-4xl font-bold text-neon-green mb-2">{stat.number}</div>
+              <div className="text-subtitle-gray">{stat.label}</div>
             </div>
           ))}
         </motion.div>

@@ -55,19 +55,19 @@ const leaders = [
     name: "Arup Mukhopadhyay",
     title: "Director, RGS",
     description: "Educational vision and school leadership",
-    photo: "/placeholder.svg?height=120&width=120",
+    photo: "/arup (2).webp?height=120&width=120",
   },
   {
     name: "Nabojyoti Gupta",
     title: "Coordinator, RGS",
     description: "Program management and student engagement",
-    photo: "/placeholder.svg?height=120&width=120",
+    photo: "/nabo.webp?height=120&width=120",
   },
   {
     name: "Sparkbee Partnership",
     title: "Technical Partner",
     description: "Technical expertise and industry connection",
-    photo: "/placeholder.svg?height=120&width=120",
+    photo: "/dip.webp?height=120&width=120",
   },
 ]
 
@@ -85,7 +85,7 @@ export function Section6Mission() {
           className="text-center mb-20"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-8">Our Mission</h2>
-          <div className="text-xl md:text-2xl leading-relaxed max-w-4xl mx-auto text-gray-300">
+          <div className="text-xl md:text-2xl leading-relaxed max-w-4xl mx-auto text-subtitle-gray">
             <TypewriterText text={missionText} delay={500} />
           </div>
         </motion.div>
@@ -105,9 +105,9 @@ export function Section6Mission() {
               }}
               whileHover={{
                 scale: 1.05,
-                boxShadow: "0 20px 40px rgba(0,255,255,0.2)",
+                boxShadow: "0 20px 40px rgba(66, 217, 138, 0.2)",
               }}
-              className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-800 hover:border-cyan-400 transition-all duration-300 text-center"
+              className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-800 hover:border-neon-green-light transition-all duration-300 text-center"
             >
               <div className="relative mb-6">
                 <Image
@@ -115,17 +115,17 @@ export function Section6Mission() {
                   alt={leader.name}
                   width={120}
                   height={120}
-                  className="rounded-full mx-auto border-4 border-cyan-400"
+                  className="rounded-full mx-auto border-4 border-neon-green"
                 />
                 <motion.div
-                  className="absolute inset-0 rounded-full bg-cyan-400/20"
+                  className="absolute inset-0 rounded-full bg-neon-green/20"
                   animate={{ scale: [1, 1.1, 1] }}
                   transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
                 />
               </div>
               <h3 className="text-xl font-bold mb-2">{leader.name}</h3>
-              <p className="text-cyan-400 font-medium mb-3">{leader.title}</p>
-              <p className="text-gray-400 text-sm">{leader.description}</p>
+              <p className="text-neon-green-light font-medium mb-3">{leader.title}</p>
+              <p className="text-subtitle-gray text-sm">{leader.description}</p>
             </motion.div>
           ))}
         </div>

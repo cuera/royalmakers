@@ -24,6 +24,8 @@ interface SlidingTestimonialsProps {
   photoClassName?: string
   ratingColor?: string
   textClassName?: string
+  dotColor?: string;
+  activeDotColor?: string;
 }
 
 export function SlidingTestimonials({
@@ -34,8 +36,10 @@ export function SlidingTestimonials({
   transition = { type: "spring", stiffness: 120, damping: 20 },
   cardClassName = "bg-gray-900 border border-gray-700 rounded-xl p-6 shadow-lg",
   photoClassName = "w-16 h-16 rounded-full border-2 border-white",
-  ratingColor = "#0ff",
+  ratingColor = "#25a360",
   textClassName = "text-lg leading-relaxed",
+  dotColor = "#1E441E",
+  activeDotColor = "#25a360",
 }: SlidingTestimonialsProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
@@ -82,7 +86,7 @@ export function SlidingTestimonials({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={transition}
-            className={`${cardClassName} hover:scale-[1.02] hover:border-cyan-400 hover:shadow-[0_0_8px_rgba(0,255,255,0.6)] transition-all duration-300`}
+            className={`${cardClassName} hover:scale-[1.02] hover:border-neon-green-light hover:shadow-[0_0_8px_rgba(66,217,138,0.5)] transition-all duration-300`}
           >
             <div className="flex flex-col items-center text-center space-y-4">
               {/* Profile photo */}
@@ -100,7 +104,7 @@ export function SlidingTestimonials({
                   <Star
                     key={i}
                     className={`w-5 h-5 ${
-                      i < testimonials[currentIndex].rating ? "fill-current text-cyan-400" : "text-gray-600"
+                      i < testimonials[currentIndex].rating ? "fill-current" : "text-gray-600"
                     }`}
                     style={{ color: i < testimonials[currentIndex].rating ? ratingColor : undefined }}
                   />
@@ -147,9 +151,8 @@ export function SlidingTestimonials({
             <button
               key={index}
               onClick={() => goToSlide(index)}
-              className={`w-3 h-3 rounded-full transition-colors ${
-                index === currentIndex ? "bg-cyan-400" : "bg-gray-600 hover:bg-gray-500"
-              }`}
+              className={`w-3 h-3 rounded-full transition-colors`}
+              style={{ backgroundColor: index === currentIndex ? activeDotColor : dotColor }}
             />
           ))}
         </div>

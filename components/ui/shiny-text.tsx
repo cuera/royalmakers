@@ -21,9 +21,9 @@ export function ShinyText({ text, speed = 3, className = "" }: ShinyTextProps) {
   }, [speed])
 
   return (
-    <div className={`relative overflow-hidden ${className}`}>
+    <span className={`relative inline-block overflow-hidden ${className}`}>
       <span className="relative z-10">{text}</span>
-      <motion.div
+      <motion.span
         className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
         style={{
           transform: `translateX(${shimmerPosition}%)`,
@@ -38,6 +38,6 @@ export function ShinyText({ text, speed = 3, className = "" }: ShinyTextProps) {
           ease: "linear",
         }}
       />
-    </div>
+    </span>
   )
 }

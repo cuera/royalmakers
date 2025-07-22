@@ -1,5 +1,6 @@
 "use client"
 
+import { supabase } from '../lib/supabaseClient';
 import { motion, AnimatePresence } from "framer-motion"
 import { useState } from "react"
 import { ChevronLeft, ChevronRight, MapPin, Phone, Mail, Facebook, Instagram, Twitter } from "lucide-react"
@@ -38,7 +39,7 @@ function ConfettiBurst() {
       {[...Array(50)].map((_, i) => (
         <motion.div
           key={i}
-          className="absolute w-2 h-2 bg-cyan-400 rounded-full"
+          className="absolute w-2 h-2 bg-neon-green rounded-full"
           initial={{
             x: "50vw",
             y: "50vh",
@@ -98,11 +99,28 @@ export function Section9Contact() {
     setCurrentStep(Math.max(currentStep - 1, 0))
   }
 
-  const handleSubmit = () => {
-    if (validateStep(currentStep)) {
-      setIsSubmitted(true)
-      setShowConfetti(true)
-      setTimeout(() => setShowConfetti(false), 3000)
+  const handleSubmit = async () => {
+    if (!validateStep(currentStep)) return;
+  
+    // snapshot all 11 fields into a payload object
+    const payload: FormData = { ...formData };
+  
+    try {
+      const { error } = await supabase
+        .from('form_responses')
+        .insert([payload]);
+  
+      if (error) {
+        console.error('Supabase insert error:', error);
+        return;
+      }
+  
+      setIsSubmitted(true);
+      setShowConfetti(true);
+      setTimeout(() => setShowConfetti(false), 3000);
+  
+    } catch (e) {
+      console.error('Unexpected error:', e);
     }
   }
 
@@ -121,7 +139,7 @@ export function Section9Contact() {
           <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", stiffness: 200 }}>
             <div className="text-6xl mb-6">🎉</div>
             <h2 className="text-4xl font-bold mb-4">Thank You!</h2>
-            <p className="text-xl text-gray-300 mb-8">
+            <p className="text-xl text-subtitle-gray mb-8">
               We've received your registration for {formData.studentName}. We'll be in touch within 24 hours to confirm
               your spot!
             </p>
@@ -131,7 +149,7 @@ export function Section9Contact() {
                 setCurrentStep(0)
                 setFormData(initialFormData)
               }}
-              className="bg-cyan-400 text-black px-8 py-3 rounded-lg font-semibold hover:bg-cyan-300 transition-colors"
+              className="bg-neon-green text-black px-8 py-3 rounded-lg font-semibold hover:bg-neon-green-light transition-colors"
             >
               Register Another Student
             </button>
@@ -154,21 +172,21 @@ export function Section9Contact() {
               className="mb-8"
             >
               <h2 className="text-4xl font-bold mb-4">Register Now</h2>
-              <p className="text-gray-300">Secure your child's spot in our innovative STEM program</p>
+              <p className="text-subtitle-gray">Secure your child's spot in our innovative STEM program</p>
             </motion.div>
 
             {/* Progress Bar */}
             <div className="mb-8">
               <div className="flex justify-between mb-2">
                 {steps.map((step, index) => (
-                  <span key={index} className={`text-sm ${index <= currentStep ? "text-cyan-400" : "text-gray-500"}`}>
+                  <span key={index} className={`text-sm ${index <= currentStep ? "text-neon-green" : "text-gray-500"}`}>
                     {step.title}
                   </span>
                 ))}
               </div>
               <div className="w-full bg-gray-800 rounded-full h-2">
                 <motion.div
-                  className="bg-gradient-to-r from-cyan-400 to-blue-500 h-2 rounded-full"
+                  className="bg-gradient-to-r from-neon-green-light to-neon-green h-2 rounded-full"
                   initial={{ width: 0 }}
                   animate={{ width: `${((currentStep + 1) / steps.length) * 100}%` }}
                   transition={{ duration: 0.5 }}
@@ -198,7 +216,7 @@ export function Section9Contact() {
                           value={formData.studentName}
                           onChange={(e) => updateFormData("studentName", e.target.value)}
                           className={`w-full p-4 bg-gray-800 border rounded-lg text-white placeholder-gray-400 focus:outline-none transition-colors ${
-                            errors.studentName ? "border-red-500" : "border-gray-700 focus:border-cyan-400"
+                            errors.studentName ? "border-red-500" : "border-gray-700 focus:border-neon-green"
                           }`}
                         />
                         {errors.studentName && (
@@ -219,7 +237,7 @@ export function Section9Contact() {
                             value={formData.age}
                             onChange={(e) => updateFormData("age", e.target.value)}
                             className={`w-full p-4 bg-gray-800 border rounded-lg text-white placeholder-gray-400 focus:outline-none transition-colors ${
-                              errors.age ? "border-red-500" : "border-gray-700 focus:border-cyan-400"
+                              errors.age ? "border-red-500" : "border-gray-700 focus:border-neon-green"
                             }`}
                           />
                           {errors.age && (
@@ -239,7 +257,7 @@ export function Section9Contact() {
                             value={formData.grade}
                             onChange={(e) => updateFormData("grade", e.target.value)}
                             className={`w-full p-4 bg-gray-800 border rounded-lg text-white placeholder-gray-400 focus:outline-none transition-colors ${
-                              errors.grade ? "border-red-500" : "border-gray-700 focus:border-cyan-400"
+                              errors.grade ? "border-red-500" : "border-gray-700 focus:border-neon-green"
                             }`}
                           />
                           {errors.grade && (
@@ -260,7 +278,7 @@ export function Section9Contact() {
                           value={formData.school}
                           onChange={(e) => updateFormData("school", e.target.value)}
                           className={`w-full p-4 bg-gray-800 border rounded-lg text-white placeholder-gray-400 focus:outline-none transition-colors ${
-                            errors.school ? "border-red-500" : "border-gray-700 focus:border-cyan-400"
+                            errors.school ? "border-red-500" : "border-gray-700 focus:border-neon-green"
                           }`}
                         />
                         {errors.school && (
@@ -286,7 +304,7 @@ export function Section9Contact() {
                           value={formData.parentName}
                           onChange={(e) => updateFormData("parentName", e.target.value)}
                           className={`w-full p-4 bg-gray-800 border rounded-lg text-white placeholder-gray-400 focus:outline-none transition-colors ${
-                            errors.parentName ? "border-red-500" : "border-gray-700 focus:border-cyan-400"
+                            errors.parentName ? "border-red-500" : "border-gray-700 focus:border-neon-green"
                           }`}
                         />
                         {errors.parentName && (
@@ -306,7 +324,7 @@ export function Section9Contact() {
                           value={formData.email}
                           onChange={(e) => updateFormData("email", e.target.value)}
                           className={`w-full p-4 bg-gray-800 border rounded-lg text-white placeholder-gray-400 focus:outline-none transition-colors ${
-                            errors.email ? "border-red-500" : "border-gray-700 focus:border-cyan-400"
+                            errors.email ? "border-red-500" : "border-gray-700 focus:border-neon-green"
                           }`}
                         />
                         {errors.email && (
@@ -326,7 +344,7 @@ export function Section9Contact() {
                           value={formData.phone}
                           onChange={(e) => updateFormData("phone", e.target.value)}
                           className={`w-full p-4 bg-gray-800 border rounded-lg text-white placeholder-gray-400 focus:outline-none transition-colors ${
-                            errors.phone ? "border-red-500" : "border-gray-700 focus:border-cyan-400"
+                            errors.phone ? "border-red-500" : "border-gray-700 focus:border-neon-green"
                           }`}
                         />
                         {errors.phone && (
@@ -346,7 +364,7 @@ export function Section9Contact() {
                           value={formData.emergencyContact}
                           onChange={(e) => updateFormData("emergencyContact", e.target.value)}
                           className={`w-full p-4 bg-gray-800 border rounded-lg text-white placeholder-gray-400 focus:outline-none transition-colors ${
-                            errors.emergencyContact ? "border-red-500" : "border-gray-700 focus:border-cyan-400"
+                            errors.emergencyContact ? "border-red-500" : "border-gray-700 focus:border-neon-green"
                           }`}
                         />
                         {errors.emergencyContact && (
@@ -370,7 +388,7 @@ export function Section9Contact() {
                           key={program}
                           className={`block p-4 border rounded-lg cursor-pointer transition-colors ${
                             formData.program === program
-                              ? "border-cyan-400 bg-cyan-400/10"
+                              ? "border-neon-green bg-neon-green/10"
                               : "border-gray-700 hover:border-gray-600"
                           }`}
                         >
@@ -402,7 +420,7 @@ export function Section9Contact() {
                           value={formData.dietary}
                           onChange={(e) => updateFormData("dietary", e.target.value)}
                           rows={3}
-                          className="w-full p-4 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:border-cyan-400 focus:outline-none transition-colors"
+                          className="w-full p-4 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:border-neon-green focus:outline-none transition-colors"
                         />
                       </div>
                       <div>
@@ -411,7 +429,7 @@ export function Section9Contact() {
                           value={formData.accessibility}
                           onChange={(e) => updateFormData("accessibility", e.target.value)}
                           rows={3}
-                          className="w-full p-4 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:border-cyan-400 focus:outline-none transition-colors"
+                          className="w-full p-4 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:border-neon-green focus:outline-none transition-colors"
                         />
                       </div>
                     </div>
@@ -433,7 +451,7 @@ export function Section9Contact() {
                 {currentStep < steps.length - 1 ? (
                   <button
                     onClick={nextStep}
-                    className="flex items-center gap-2 px-6 py-3 bg-cyan-400 text-black rounded-lg hover:bg-cyan-300 transition-colors font-semibold"
+                    className="flex items-center gap-2 px-6 py-3 bg-neon-green text-black rounded-lg hover:bg-neon-green-light transition-colors font-semibold"
                   >
                     Next
                     <ChevronRight className="w-4 h-4" />
@@ -441,7 +459,7 @@ export function Section9Contact() {
                 ) : (
                   <button
                     onClick={handleSubmit}
-                    className="px-8 py-3 bg-gradient-to-r from-cyan-400 to-blue-500 text-black rounded-lg hover:shadow-[0_0_20px_rgba(0,255,255,0.5)] transition-all font-semibold"
+                    className="bg-gradient-to-r from-neon-green-light to-neon-green text-black py-2 rounded-lg font-semibold hover:shadow-[0_0_15px_rgba(66,217,138,0.35)] transition-all text-sm"
                   >
                     Submit Registration
                   </button>
@@ -461,10 +479,10 @@ export function Section9Contact() {
 
               <div className="space-y-6 mb-8">
                 <div className="flex items-start gap-4">
-                  <MapPin className="w-6 h-6 text-cyan-400 mt-1 flex-shrink-0" />
+                  <MapPin className="w-6 h-6 text-neon-green" />
                   <div>
                     <h4 className="font-semibold mb-1">Address</h4>
-                    <p className="text-gray-300">
+                    <p className="text-subtitle-gray">
                       Royal Global School
                       <br />
                       Guwahati, Assam 781001
@@ -475,18 +493,18 @@ export function Section9Contact() {
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <Phone className="w-6 h-6 text-cyan-400 mt-1 flex-shrink-0" />
+                  <Phone className="w-6 h-6 text-neon-green flex-shrink-0" />
                   <div>
                     <h4 className="font-semibold mb-1">Phone</h4>
-                    <p className="text-gray-300">+91 98765 43210</p>
+                    <p className="text-subtitle-gray">+91 98765 43210</p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <Mail className="w-6 h-6 text-cyan-400 mt-1 flex-shrink-0" />
+                  <Mail className="w-6 h-6 text-neon-green flex-shrink-0" />
                   <div>
                     <h4 className="font-semibold mb-1">Email</h4>
-                    <p className="text-gray-300">info@royalmakercamp.com</p>
+                    <p className="text-subtitle-gray">info@royalmakercamp.com</p>
                   </div>
                 </div>
               </div>
@@ -505,17 +523,12 @@ export function Section9Contact() {
                       href={social.href}
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.9 }}
-                      className="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-cyan-400 hover:text-black transition-colors"
+                      className="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-neon-green hover:text-black transition-colors"
                     >
                       <social.icon className="w-5 h-5" />
                     </motion.a>
                   ))}
                 </div>
-              </div>
-
-              {/* Map */}
-              <div className="bg-gray-800 rounded-xl p-4 h-64 flex items-center justify-center">
-                <p className="text-gray-400">Interactive Map Coming Soon</p>
               </div>
             </motion.div>
           </div>

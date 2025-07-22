@@ -62,7 +62,22 @@ const config: Config = {
   				'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
   				border: 'hsl(var(--sidebar-border))',
   				ring: 'hsl(var(--sidebar-ring))'
-  			}
+  			},
+        accent: '#15FFBC',
+        glow: 'rgba(0,246,255,0.5)',
+        'neon-green': '#25a360',
+        'neon-green-light': '#42d98a',
+        'neon-green-dark': '#168f54',
+        'neon-green-darker': '#1E441E',
+        'subtitle-gray': 'rgb(179, 179, 179)',
+      },
+      boxShadow: {
+        neon: '0 0 15px var(--tw-shadow-color), 0 0 30px var(--tw-shadow-color)',
+      },
+      fontFamily: {
+        sans: ['var(--font-sans)', 'system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', '"Noto Sans"', 'sans-serif', '"Apple Color Emoji"', '"Segoe UI Emoji"', '"Segoe UI Symbol"', '"Noto Color Emoji"'],
+        inter: ['Inter', 'sans-serif'],
+        satoshi: ['Satoshi', 'sans-serif'],
   		},
   		borderRadius: {
   			lg: 'var(--radius)',

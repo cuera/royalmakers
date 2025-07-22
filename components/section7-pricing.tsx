@@ -8,7 +8,7 @@ const pricingTiers = [
   {
     name: "Explorer",
     price: "₹2,999",
-    duration: "1-day workshop",
+    duration: "2-day workshop",
     description: "Perfect for first-time makers",
     features: [
       "Basic robotics activities",
@@ -21,7 +21,7 @@ const pricingTiers = [
   },
   {
     name: "Innovator",
-    price: "₹7,999",
+    price: "₹5,999",
     duration: "3-day program",
     description: "Our most comprehensive experience",
     features: [
@@ -38,7 +38,7 @@ const pricingTiers = [
   },
   {
     name: "Pioneer",
-    price: "₹12,999",
+    price: "₹9,999",
     duration: "5-day advanced",
     description: "For serious young innovators",
     features: [
@@ -62,7 +62,7 @@ const comparisonFeatures = [
   { feature: "3D Design", explorer: "❌", innovator: "✅", pioneer: "✅" },
   { feature: "Meals Included", explorer: "Snacks", innovator: "Full meals", pioneer: "Premium meals" },
   { feature: "Take-home Kit", explorer: "Basic", innovator: "Premium", pioneer: "Deluxe" },
-  { feature: "Mentoring", explorer: "❌", innovator: "Group", pioneer: "Personal" },
+  { feature: "Mentoring", explorer: "✅", innovator: "Group", pioneer: "Personal" },
   { feature: "Certificate", explorer: "✅", innovator: "✅", pioneer: "✅" },
 ]
 
@@ -80,7 +80,7 @@ export function Section7Pricing() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-6">Choose Your Adventure</h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="text-xl text-subtitle-gray max-w-3xl mx-auto">
             Select the perfect program to launch your child's journey into STEM innovation
           </p>
         </motion.div>
@@ -95,12 +95,12 @@ export function Section7Pricing() {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               whileHover={{
                 scale: 1.02,
-                boxShadow: tier.popular ? "0 25px 50px rgba(0,255,255,0.3)" : "0 25px 50px rgba(132,0,255,0.2)",
+                boxShadow: tier.popular ? "0 25px 50px rgba(66,217,138,0.3)" : "0 25px 50px rgba(37,163,96,0.2)",
               }}
               className={`relative bg-gray-900/50 backdrop-blur-sm rounded-2xl p-8 border transition-all duration-300 ${
                 tier.popular
-                  ? "border-cyan-400 shadow-[0_0_30px_rgba(0,255,255,0.2)]"
-                  : "border-gray-800 hover:border-purple-400"
+                  ? "border-neon-green-light shadow-[0_0_30px_rgba(66,217,138,0.25)]"
+                  : "border-gray-800 hover:border-neon-green-dark"
               }`}
               onClick={() => setExpandedCard(expandedCard === index ? null : index)}
             >
@@ -109,7 +109,7 @@ export function Section7Pricing() {
                 <motion.div
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
-                  className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-cyan-400 to-blue-500 text-black px-6 py-2 rounded-full font-bold text-sm flex items-center gap-2"
+                  className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-neon-green-light to-neon-green text-black px-6 py-2 rounded-full font-bold text-sm flex items-center gap-2"
                 >
                   <Star className="w-4 h-4 fill-current" />
                   MOST POPULAR
@@ -119,8 +119,8 @@ export function Section7Pricing() {
               <div className="text-center mb-6">
                 <h3 className="text-2xl font-bold mb-2">{tier.name}</h3>
                 <div className="text-4xl font-bold mb-2">{tier.price}</div>
-                <p className="text-cyan-400 font-medium mb-2">{tier.duration}</p>
-                <p className="text-gray-400">{tier.description}</p>
+                <p className="text-neon-green font-medium mb-2">{tier.duration}</p>
+                <p className="text-subtitle-gray">{tier.description}</p>
               </div>
 
               <motion.div
@@ -128,7 +128,7 @@ export function Section7Pricing() {
                 animate={{ height: expandedCard === index ? "auto" : "200px" }}
                 className="overflow-hidden"
               >
-                <ul className="space-y-3 mb-8">
+                <ul className="space-y-3">
                   {tier.features.map((feature, i) => (
                     <motion.li
                       key={i}
@@ -137,24 +137,12 @@ export function Section7Pricing() {
                       transition={{ delay: i * 0.1 }}
                       className="flex items-center gap-3"
                     >
-                      <Check className="w-5 h-5 text-green-400 flex-shrink-0" />
-                      <span className="text-gray-300">{feature}</span>
+                      <Check className="w-5 h-5 text-neon-green flex-shrink-0" />
+                      <span className="text-subtitle-gray">{feature}</span>
                     </motion.li>
                   ))}
                 </ul>
               </motion.div>
-
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className={`w-full py-3 rounded-lg font-semibold transition-all duration-300 ${
-                  tier.popular
-                    ? "bg-gradient-to-r from-cyan-400 to-blue-500 text-black hover:shadow-[0_0_20px_rgba(0,255,255,0.5)]"
-                    : "bg-purple-600 hover:bg-purple-700 text-white"
-                }`}
-              >
-                Register Now
-              </motion.button>
             </motion.div>
           ))}
         </div>
@@ -187,9 +175,9 @@ export function Section7Pricing() {
                     className="border-b border-gray-800 hover:bg-gray-800/50"
                   >
                     <td className="py-4 px-4 font-medium">{row.feature}</td>
-                    <td className="py-4 px-4 text-center text-gray-300">{row.explorer}</td>
-                    <td className="py-4 px-4 text-center text-gray-300">{row.innovator}</td>
-                    <td className="py-4 px-4 text-center text-gray-300">{row.pioneer}</td>
+                    <td className="py-4 px-4 text-center text-subtitle-gray">{row.explorer}</td>
+                    <td className="py-4 px-4 text-center text-subtitle-gray">{row.innovator}</td>
+                    <td className="py-4 px-4 text-center text-subtitle-gray">{row.pioneer}</td>
                   </motion.tr>
                 ))}
               </tbody>

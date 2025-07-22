@@ -1,5 +1,6 @@
 "use client"
 
+import React from "react"
 import { motion } from "framer-motion"
 import Image from "next/image"
 
@@ -8,7 +9,7 @@ interface GalleryGridProps {
   className?: string
 }
 
-export default function GalleryGrid({ images, className = "" }: GalleryGridProps) {
+const GalleryGrid = React.memo(function GalleryGrid({ images, className = "" }: GalleryGridProps) {
   // Only show first 6 images for the asymmetric layout
   const displayImages = images.slice(0, 6)
 
@@ -34,9 +35,9 @@ export default function GalleryGrid({ images, className = "" }: GalleryGridProps
                 src={src || "/placeholder.svg"}
                 alt={`Gallery image ${i + 1}`}
                 fill
+                loading="lazy"
                 className="object-cover transition-transform duration-300 hover:scale-105"
               />
-
               {/* Overlay with activity label */}
               <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-200">
                 <span className="text-white font-semibold text-lg">Activity {i + 1}</span>
@@ -47,4 +48,6 @@ export default function GalleryGrid({ images, className = "" }: GalleryGridProps
       </div>
     </div>
   )
-}
+})
+
+export default GalleryGrid
