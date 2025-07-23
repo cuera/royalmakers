@@ -2,40 +2,22 @@
 
 import { StickyNavigation } from "@/components/sticky-navigation"
 import { Hero } from "@/components/hero"
-import { Preloader } from "@/components/preloader"
-import { useAppLoading } from "@/hooks/use-app-loading"
 import { Card, CardContent } from "@/components/ui/card"
 import { Check } from "lucide-react"
 import DashboardSnapshotSection from "@/components/dashboard-snapshot-section"
-import dynamic from "next/dynamic"
 import MosaicGrid from "@/components/mosaic-grid"
+import { LazyClient } from "@/components/lazy-client"
 
-
-
-const Gallery = dynamic(() => import("@/components/gallery"), { ssr: false })
-const SkillsGrid = dynamic(() => import("@/components/skills-grid"), { ssr: false })
-const Testimonials = dynamic(() => import("@/components/testimonials").then(mod => ({ default: mod.Testimonials })), { ssr: false })
-const Section6Mission = dynamic(() => import("@/components/section6-mission").then(mod => ({ default: mod.Section6Mission })), { ssr: false })
-const Section7Pricing = dynamic(() => import("@/components/section7-pricing").then(mod => ({ default: mod.Section7Pricing })), { ssr: false })
-const Section8FAQ = dynamic(() => import("@/components/section8-faq").then(mod => ({ default: mod.Section8FAQ })), { ssr: false })
-const Section9Contact = dynamic(() => import("@/components/section9-contact").then(mod => ({ default: mod.Section9Contact })), { ssr: false })
-const Section10Footer = dynamic(() => import("@/components/section10-footer").then(mod => ({ default: mod.Section10Footer })), { ssr: false })
+// No eager dynamic imports; components will be loaded via LazyClient when scrolled into view
 
 export default function Home() {
-  const { isLoading, setSplineLoaded } = useAppLoading({
-    minimumDisplayTime: 300,  // 0.3 seconds minimum
-    maximumDisplayTime: 2000, // 2 seconds maximum
-    developmentMode: false,   // Wait for Spline to load
-  })
+  // Preloader removed for faster initial render
 
-  const handleSplineLoad = () => {
-    setSplineLoaded(true)
-  }
+  const handleSplineLoad = () => {}
 
   return (
     <>
-      {/* Preloader */}
-      <Preloader isVisible={isLoading} />
+      {/* Preloader removed */}
       
     <main className="min-h-screen bg-white">
       {/* Sticky pill navbar */}
@@ -58,11 +40,11 @@ export default function Home() {
       </section>
 
       {/* 3-Day Activities Gallery */}
-      <Gallery />
+      <LazyClient importFn={() => import("@/components/gallery")} placeholder={<div className="h-[800px]" />} />
 
       {/* Skills & Features Grid */}
       <section id="skills">
-      <SkillsGrid />
+        <LazyClient importFn={() => import("@/components/skills-grid")} placeholder={<div className="h-[600px]" />} />
       </section>
 
       {/* Everything you need */}
@@ -77,31 +59,31 @@ export default function Home() {
 
       {/* Testimonials Carousel */}
       <section id="testimonials">
-      <Testimonials />
+        <LazyClient importFn={() => import("@/components/testimonials").then(mod => ({ default: mod.Testimonials }))} placeholder={<div className="h-[600px]" />} />
       </section>
 
       {/* Mission Statement & Leadership */}
       <section id="mission">
-      <Section6Mission />
+        <LazyClient importFn={() => import("@/components/section6-mission").then(mod => ({ default: mod.Section6Mission }))} placeholder={<div className="h-[700px]" />} />
       </section>
 
       {/* Pricing & Programs */}
       <section id="pricing">
-      <Section7Pricing />
+        <LazyClient importFn={() => import("@/components/section7-pricing").then(mod => ({ default: mod.Section7Pricing }))} placeholder={<div className="h-[700px]" />} />
       </section>
 
       {/* FAQ */}
       <section id="faq">
-      <Section8FAQ />
+        <LazyClient importFn={() => import("@/components/section8-faq").then(mod => ({ default: mod.Section8FAQ }))} placeholder={<div className="h-[600px]" />} />
       </section>
 
       {/* Contact & Registration */}
       <section id="contact">
-      <Section9Contact />
+        <LazyClient importFn={() => import("@/components/section9-contact").then(mod => ({ default: mod.Section9Contact }))} placeholder={<div className="h-[800px]" />} />
       </section>
 
       {/* Footer */}
-      <Section10Footer />
+      <LazyClient importFn={() => import("@/components/section10-footer").then(mod => ({ default: mod.Section10Footer }))} placeholder={null} />
     </main>
     </>
   )

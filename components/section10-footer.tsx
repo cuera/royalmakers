@@ -103,7 +103,7 @@ export function Section10Footer() {
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-neon-green flex-shrink-0" />
-                <span className="text-subtitle-gray text-sm">+91 98765 43210</span>
+                <span className="text-subtitle-gray text-sm">+91 93652 02250</span>
               </div>
               <div className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-neon-green flex-shrink-0" />
@@ -228,7 +228,7 @@ export function Section10Footer() {
             <p className="text-subtitle-gray text-sm">© 2025 Royal MakerCamp. All rights reserved.</p>
           </div>
 
-          <div className="text-subtitle-gray text-sm">Made with ❤️ for future innovators</div>
+          <div className="text-subtitle-gray text-sm">Made with ❤️ for future innovators by the_quera_guy</div>
         </motion.div>
       </div>
     </footer>
