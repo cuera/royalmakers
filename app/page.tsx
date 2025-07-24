@@ -5,7 +5,7 @@ import { Hero } from "@/components/hero"
 import { Card, CardContent } from "@/components/ui/card"
 import { Check } from "lucide-react"
 import DashboardSnapshotSection from "@/components/dashboard-snapshot-section"
-import MosaicGrid from "@/components/mosaic-grid"
+import ResponsiveMosaicGrid from "@/components/responsive-mosaic-grid"
 import { LazyClient } from "@/components/lazy-client"
 
 // No eager dynamic imports; components will be loaded via LazyClient when scrolled into view
@@ -35,7 +35,7 @@ export default function Home() {
               A glimpse into our hands-on STEM activities and student projects
             </p>
           </div>
-          <MosaicGrid />
+          <ResponsiveMosaicGrid />
         </div>
       </section>
 
