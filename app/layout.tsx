@@ -18,7 +18,7 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="//my.spline.design" />
         <link rel="preconnect" href="https://my.spline.design" />
       </head>
-      <body>{children}</body>
+  <body className="overflow-x-hidden sm:overflow-x-auto">{children}</body>
     </html>
   )
 }
