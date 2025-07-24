@@ -14,7 +14,7 @@ const ctaTransition = {
 
 export function Hero({ onSplineLoad }: HeroProps) {
   return (
-    <section className="h-screen bg-black relative overflow-hidden flex flex-col items-center justify-center px-4">
+  <section className="h-screen bg-black relative overflow-hidden flex flex-col items-center justify-center px-4 max-w-full sm:max-w-none">
       <div className="absolute inset-0 w-full h-full">
     <iframe
       src="https://my.spline.design/nexbotrobotcharacterconcept-Rq2GNSjbsa4Lto0np1CbTlik/"

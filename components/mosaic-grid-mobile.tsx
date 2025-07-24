@@ -5,7 +5,7 @@ import Image from "next/image"
 
 export default function MosaicGridMobile() {
   return (
-    <div className="space-y-4 p-4 bg-transparent max-w-lg mx-auto">
+  <div className="space-y-4 p-4 bg-transparent max-w-lg mx-auto max-w-full overflow-hidden sm:max-w-lg sm:overflow-visible">
       {/* Hero Card - Robotics */}
       <div className="bg-green-400/80 rounded-xl h-48 flex items-center justify-center relative overflow-hidden">
         <Image 

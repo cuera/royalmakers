@@ -13,7 +13,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="overflow-x-hidden sm:overflow-x-auto">
       <head>
         <link rel="dns-prefetch" href="//my.spline.design" />
         <link rel="preconnect" href="https://my.spline.design" />

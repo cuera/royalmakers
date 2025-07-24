@@ -27,7 +27,7 @@ export default function Home() {
         <Hero onSplineLoad={handleSplineLoad} />
 
       {/* New Gallery Grid Section */}
-      <section id="gallery" className="bg-black text-white py-16">
+  <section id="gallery" className="bg-black text-white py-16 max-w-full sm:max-w-none overflow-hidden sm:overflow-visible">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold mb-6">Quick Preview</h2>
@@ -48,7 +48,7 @@ export default function Home() {
       </section>
 
       {/* Everything you need */}
-      <section className="bg-black text-white py-16">
+  <section className="bg-black text-white py-16 max-w-full sm:max-w-none overflow-hidden sm:overflow-visible">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">Everything you need</h2>
             <p className="text-xl text-subtitle-gray max-w-3xl mx-auto">Skill Matrix dashboard is a powerful tool designed to help you optimize your learning journey. It provides a comprehensive and interactive overview of your skill development, enabling you to track progress, identify strengths, and pinpoint areas for improvement. With more data this will improve</p>
