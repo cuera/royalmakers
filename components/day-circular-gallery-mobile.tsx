@@ -1,9 +1,11 @@
-"use client";
+'use client';
 
 import React from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { generateDayImages, generateActivityTitle } from '../utils/image-generator';
+
+"use client"
 
 // Desktop day titles for header text
 const DAY_TITLES = [
@@ -22,15 +24,7 @@ export default function DayCircularGalleryMobile({ dayNumber }: DayCircularGalle
 
   return (
     <div className="max-w-sm mx-auto p-4">
-      {/* Day header (desktop‑like text) */}
-      <div className="text-center mb-6">
-        <h2 className="text-2xl font-bold mb-2">
-          {`Day ${dayNumber} — ${DAY_TITLES[dayNumber - 1]?.title?.split('—')[1]?.trim() || ''}`}
-        </h2>
-        <h3 className="text-base text-subtitle-gray">
-          {DAY_TITLES[dayNumber - 1]?.subtitle || ''}
-        </h3>
-      </div>
+  {/* Removed duplicate day header, now only parent renders it */}
 
       {/* Auto‑generated cards */}
       <div className="space-y-4">
