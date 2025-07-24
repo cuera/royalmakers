@@ -5,8 +5,6 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { generateDayImages, generateActivityTitle } from '../utils/image-generator';
 
-"use client"
-
 // Desktop day titles for header text
 const DAY_TITLES = [
   { title: 'Day 1 — Foundation Building', subtitle: 'Discovery & Exploration' },
