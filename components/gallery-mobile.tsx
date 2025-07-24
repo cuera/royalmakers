@@ -23,7 +23,6 @@ const DAY_TITLES = [
 export default function GalleryMobile() {
   // Auto-generate all days data
   const allDaysData = generateAllDaysImages()
-  
   return (
     <section className="bg-black text-white py-10">
       <div className="max-w-lg mx-auto px-4">
@@ -37,19 +36,9 @@ export default function GalleryMobile() {
           <h1 className="text-3xl font-bold mb-4 text-neon-green">
             3-Day Innovation Journey
           </h1>
-          <p className="text-lg text-subtitle-gray">
-            Transform through hands-on STEM learning
+          <p className="text-base text-subtitle-gray max-w-xs mx-auto">
+            Experience the transformation as young minds explore, create, and innovate through our comprehensive STEM program.
           </p>
-          
-          {/* Stats */}
-          <div className="flex justify-center gap-6 mt-4 text-sm">
-            {allDaysData.map((day, index) => (
-              <div key={day.day} className="text-center">
-                <div className="text-neon-green font-bold">{day.totalCount}</div>
-                <div className="text-gray-400">Day {day.day} Activities</div>
-              </div>
-            ))}
-          </div>
         </motion.div>
 
         {/* Auto-generated Days */}
@@ -65,28 +54,13 @@ export default function GalleryMobile() {
               <h2 className="text-2xl font-bold mb-2">
                 {DAY_TITLES[index]?.title || `Day ${dayData.day}`}
               </h2>
-              <h3 className="text-lg text-subtitle-gray">
+              <h3 className="text-base text-subtitle-gray">
                 {DAY_TITLES[index]?.subtitle || "Learning Experience"}
               </h3>
             </div>
-            
             <DayCircularGalleryMobile dayNumber={dayData.day} />
           </motion.div>
         ))}
-        
-        {/* Total activities summary */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="text-center mt-12 p-6 bg-gray-900/30 rounded-xl border border-gray-800"
-        >
-          <h3 className="text-xl font-bold mb-2">Complete Journey</h3>
-          <p className="text-subtitle-gray">
-            {allDaysData.reduce((total, day) => total + day.totalCount, 0)} total activities 
-            across {allDaysData.length} intensive days
-          </p>
-        </motion.div>
       </div>
     </section>
   )
