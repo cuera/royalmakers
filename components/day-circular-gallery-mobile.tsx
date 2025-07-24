@@ -1,11 +1,9 @@
-'use client';
+"use client";
 
 import React from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { generateDayImages, generateActivityTitle } from '../utils/image-generator';
-
-"use client"
 
 // Desktop day titles for header text
 const DAY_TITLES = [
