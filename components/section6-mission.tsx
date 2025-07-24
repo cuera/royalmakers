@@ -12,6 +12,9 @@ function TypewriterText({ text, delay = 0 }: { text: string; delay?: number }) {
   const [currentIndex, setCurrentIndex] = useState(0)
 
   useEffect(() => {
+    // Calculate interval so the whole text appears in exactly 6 seconds (excluding initial delay)
+    const totalDuration = 6000; // ms
+    const interval = text.length > 0 ? totalDuration / text.length : 30;
     const timer = setTimeout(
       () => {
         if (currentIndex < text.length) {
@@ -19,11 +22,11 @@ function TypewriterText({ text, delay = 0 }: { text: string; delay?: number }) {
           setCurrentIndex(currentIndex + 1)
         }
       },
-      delay + currentIndex * 30,
-    )
+      currentIndex === 0 ? delay : interval,
+    );
 
-    return () => clearTimeout(timer)
-  }, [currentIndex, text, delay])
+    return () => clearTimeout(timer);
+  }, [currentIndex, text, delay]);
 
   return <span>{displayText}</span>
 }

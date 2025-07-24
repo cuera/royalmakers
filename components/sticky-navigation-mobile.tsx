@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import Image from "next/image";
+import { Menu } from "lucide-react";
 
 const navItems = [
   { label: "Dashboard", href: "/dashboard" },
@@ -16,73 +16,41 @@ const navItems = [
 ];
 
 export default function StickyNavigationMobile() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   return (
-    <header className="fixed top-4 left-1/2 z-50 w-full -translate-x-1/2 px-4">
-      <nav
-        className={
-          `mx-auto max-w-fit bg-white/80 backdrop-blur-lg shadow-lg rounded-full px-6 py-3 flex items-center gap-8 border border-gray-200`
-        }
-      >
-        {/* Logo */}
-        <Link href="/" className="inline-flex items-center">
-          <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
-            <div className="w-4 h-4 bg-black rounded-full"></div>
-          </div>
+    <header className="fixed top-0 left-0 w-full z-50">
+      <nav className="flex items-center justify-between w-full px-4 py-2" style={{ background: "rgba(0,0,0,0)" }}>
+        {/* Logo on left */}
+        <Link href="/" className="flex items-center">
+          <Image src="/logo_192x192.png" alt="Logo" width={40} height={40} className="rounded-full" />
         </Link>
 
-        {/* Mobile Nav Links (hidden, only menu button visible) */}
-        <ul className="hidden md:flex items-center space-x-8">
-          {navItems.map((item) => (
-            <li key={item.href} className="group relative">
-              <Link
-                href={item.href}
-                className="text-black hover:text-gray-800 text-sm font-medium transition-colors duration-200"
-              >
-                {item.label}
-              </Link>
-              <div className="absolute bottom-[-4px] left-0 w-full h-[2px] bg-black scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center" />
-            </li>
-          ))}
-        </ul>
-
-        {/* Mobile menu button */}
-        <Button
-          variant="ghost"
-          size="sm"
-          className="md:hidden p-2 text-black"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        {/* Hamburger on right */}
+        <button
+          className="p-2"
+          aria-label="Open menu"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
-          {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-        </Button>
+          <Menu className="w-8 h-8" style={{ color: "#42d98a" }} />
+        </button>
       </nav>
 
       {/* Mobile Navigation Menu - Floating below main nav */}
-      {isMobileMenuOpen && (
-        <div className="fixed top-20 left-1/2 z-40 w-full -translate-x-1/2 px-4 md:hidden">
-          <div className="mx-auto max-w-sm bg-white/95 backdrop-blur-lg rounded-2xl shadow-xl border border-gray-200 p-4">
-            <nav className="space-y-1">
-              {navItems.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="block text-black hover:text-gray-800 hover:bg-black/10 text-sm font-medium px-3 py-2 rounded-lg transition-colors duration-200"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </nav>
-          </div>
+      {isMenuOpen && (
+        <div className="absolute top-14 right-4 bg-black/90 rounded-xl shadow-xl p-4 border border-neon-green-light" style={{ minWidth: 180 }}>
+          <nav className="flex flex-col gap-2">
+            {navItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="text-white hover:text-neon-green-light text-base font-medium px-3 py-2 rounded-lg transition-colors duration-200"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
         </div>
-      )}
-
-      {/* Backdrop overlay for mobile menu */}
-      {isMobileMenuOpen && (
-        <div
-          className="fixed inset-0 z-30 bg-black/20 backdrop-blur-sm md:hidden"
-          onClick={() => setIsMobileMenuOpen(false)}
-        />
       )}
     </header>
   );

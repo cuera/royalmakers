@@ -40,7 +40,7 @@ export function Hero({ onSplineLoad }: HeroProps) {
 
       <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 flex flex-col sm:flex-row gap-4 z-30">
         <motion.a
-          href="#watch"
+          href="#contact"
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ ...ctaTransition, delay: 1.2 }}
@@ -51,7 +51,7 @@ export function Hero({ onSplineLoad }: HeroProps) {
           whileTap={{ scale: 0.95 }}
           className="rounded-full border border-neon-green px-6 py-3 text-white backdrop-blur-sm hover:bg-neon-green/10 transition-colors font-semibold text-center"
         >
-          Watch Our Camp
+          Enroll Now
         </motion.a>
       </div>
 
