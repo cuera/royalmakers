@@ -496,7 +496,7 @@ export function Section9Contact() {
                   <Phone className="w-6 h-6 text-neon-green flex-shrink-0" />
                   <div>
                     <h4 className="font-semibold mb-1">Phone</h4>
-                    <p className="text-subtitle-gray">+91 93652 02250</p>
+                    <p className="text-subtitle-gray">+91 93652 43210</p>
                   </div>
                 </div>
 
