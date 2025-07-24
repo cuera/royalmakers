@@ -39,8 +39,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 3-Day Activities Gallery */}
-      <LazyClient importFn={() => import("@/components/gallery")} placeholder={<div className="h-[800px]" />} />
+  {/* 3-Day Activities Gallery */}
+  <LazyClient importFn={() => import("@/components/gallery-responsive")} placeholder={<div className="h-[800px]" />} />
 
       {/* Skills & Features Grid */}
       <section id="skills">
