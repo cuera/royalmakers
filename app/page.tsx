@@ -1,6 +1,6 @@
 "use client"
 
-import { StickyNavigation } from "@/components/sticky-navigation"
+import StickyNavigation from "@/components/sticky-navigation"
 import { Hero } from "@/components/hero"
 import { Card, CardContent } from "@/components/ui/card"
 import { Check } from "lucide-react"

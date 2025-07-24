@@ -5,7 +5,7 @@ import { Texture } from "ogl";
  */
 export function debounce<T extends (...args: any[]) => void>(func: T, wait: number) {
   let timeout: ReturnType<typeof setTimeout> | undefined;
-  return function (...args: Parameters<T>) {
+  return function(this: ThisParameterType<T>, ...args: Parameters<T>) {
     if (timeout) clearTimeout(timeout);
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const context = this;
