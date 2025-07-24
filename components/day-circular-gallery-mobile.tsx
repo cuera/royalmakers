@@ -1,39 +1,30 @@
-// Desktop day titles for header text
-const DAY_TITLES = [
-  {
-    title: "Day 1 — Foundation Building",
-    subtitle: "Discovery & Exploration"
-  },
-  {
-    title: "Day 2 — Advanced Projects", 
-    subtitle: "Creation & Development"
-  },
-  {
-    title: "Day 3 — Final Showcase",
-    subtitle: "Presentation & Celebration"
-  }
-]
+'use client';
+
+import React from 'react';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
+import { generateDayImages, generateActivityTitle } from '../utils/image-generator';
+
 "use client"
 
-import React from "react"
-import { motion } from "framer-motion"
-import Image from "next/image"
-import { generateDayImages, generateActivityTitle } from "../utils/image-generator"
+// Desktop day titles for header text
+const DAY_TITLES = [
+  { title: 'Day 1 — Foundation Building', subtitle: 'Discovery & Exploration' },
+  { title: 'Day 2 — Advanced Projects',  subtitle: 'Creation & Development' },
+  { title: 'Day 3 — Final Showcase',     subtitle: 'Presentation & Celebration' }
+];
 
 interface DayCircularGalleryMobileProps {
-  dayNumber: number
+  dayNumber: number;
 }
 
-export default function DayCircularGalleryMobile({ 
-  dayNumber 
-}: DayCircularGalleryMobileProps) {
-  
-  // Auto-generate images and activities for this day
-  const dayData = generateDayImages(dayNumber)
-  
+export default function DayCircularGalleryMobile({ dayNumber }: DayCircularGalleryMobileProps) {
+  // Auto‑generate images and activities for this day
+  const dayData = generateDayImages(dayNumber);
+
   return (
     <div className="max-w-sm mx-auto p-4">
-      {/* Day header (desktop-like text) */}
+      {/* Day header (desktop‑like text) */}
       <div className="text-center mb-6">
         <h2 className="text-2xl font-bold mb-2">
           {`Day ${dayNumber} — ${DAY_TITLES[dayNumber - 1]?.title?.split('—')[1]?.trim() || ''}`}
@@ -43,11 +34,11 @@ export default function DayCircularGalleryMobile({
         </h3>
       </div>
 
-      {/* Auto-generated cards */}
+      {/* Auto‑generated cards */}
       <div className="space-y-4">
         {dayData.images.map((imagePath, index) => {
-          const activity = generateActivityTitle(dayNumber, index)
-          
+          const activity = generateActivityTitle(dayNumber, index);
+
           return (
             <motion.div
               key={`day${dayNumber}-${index}`}
@@ -70,12 +61,11 @@ export default function DayCircularGalleryMobile({
                   <p className="text-white/80 text-xs">{activity.subtitle}</p>
                 </div>
               </div>
-              
-              {/* Removed activity number badge */}
+              {/* badge removed */}
             </motion.div>
-          )
+          );
         })}
       </div>
     </div>
-  )
+  );
 }
