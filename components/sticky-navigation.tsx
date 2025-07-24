@@ -19,7 +19,7 @@ export default function StickyNavigation() {
     <>
       {/* Desktop Nav */}
       <header className="hidden md:block fixed top-4 left-1/2 z-50 w-full -translate-x-1/2 px-4">
-  <nav className="mx-auto max-w-fit bg-black/33 backdrop-blur-lg shadow-lg rounded-full px-6 py-3 flex items-center gap-8 border border-[#42d98a]">
+  <nav className="mx-auto max-w-fit bg-black/33 backdrop-blur-lg shadow-lg rounded-full px-6 py-3 flex items-center gap-8 border border-gray-800">
           {/* Logo */}
           <Link href="/" className="inline-flex items-center">
             <div className="w-8 h-8 bg-black rounded-full flex items-center justify-center">
