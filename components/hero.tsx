@@ -19,11 +19,12 @@ export function Hero({ onSplineLoad }: HeroProps) {
     <iframe
       src="https://my.spline.design/nexbotrobotcharacterconcept-Rq2GNSjbsa4Lto0np1CbTlik/"
       className="w-full h-full rounded-xl shadow-2xl"
+      style={{ pointerEvents: 'none' }}
       loading="lazy"
       title="AI Assistant Robot"
-          sandbox="allow-scripts allow-same-origin"
-          onLoad={onSplineLoad}
-        />
+      sandbox="allow-scripts allow-same-origin"
+      onLoad={onSplineLoad}
+    />
       </div>
 
       <div className="absolute inset-0 flex flex-col items-center justify-center z-20 pointer-events-none">
